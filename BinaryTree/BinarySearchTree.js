@@ -1,5 +1,5 @@
 /**
- * 树节点
+ * 树结点
  * 
  * @class Node
  */
@@ -33,21 +33,21 @@ class BinarySearchTree {
   }
 
   /**
-   * 插入一个树节点
+   * 插入一个树结点
    * 
    * @param {any} key 
    * @memberof BinarySearchTree
    */
   insertNode(key) {
     let node = new Node(key);
-    // curParent 待插入节点的父节点
+    // curParent 待插入结点的父结点
     let curParent = null;
-    // curNode 节点待插入的位置
+    // curNode 结点待插入的位置
     let curNode = this.root;
 
-    // 循环查找节点的插入位置
+    // 循环查找结点的插入位置
     while (curNode) {
-      // 每次循环curParent始终指向父节点，curNode根据key值向左还是向右下降直到为空
+      // 每次循环curParent始终指向父结点，curNode根据key值向左还是向右下降直到为空
       curParent = curNode;
       if (node.key < curNode.key) {
         curNode = curNode.left;
@@ -67,7 +67,7 @@ class BinarySearchTree {
   }
 
   /**
-   * 从树中查找一个节点
+   * 从树中查找一个结点
    * 
    * @param {any} key 
    * @returns Node
@@ -75,9 +75,9 @@ class BinarySearchTree {
    */
   searchNode(key) {
     /**
-     * 递归子树查找节点
+     * 递归子树查找结点
      * 
-     * @param {Node} node 当前子树根节点
+     * @param {Node} node 当前子树根结点
      * @param {any} key 
      * @returns Node
      */
@@ -85,7 +85,7 @@ class BinarySearchTree {
       // 输出查找的路线
       console.log(node.key);
 
-      // 找到节点或者为null时返回
+      // 找到结点或者为null时返回
       if (!node || node.key === key) {
         return node;
       }
@@ -103,8 +103,8 @@ class BinarySearchTree {
   }
 
   /**
-   * 寻找最小key的节点
-   * 二叉查找树的特点: 最小节点没有左孩子
+   * 寻找最小key的结点
+   * 二叉查找树的特点: 最小结点没有左孩子
    * 
    * @returns Node
    * @memberof BinarySearchTree
@@ -118,8 +118,8 @@ class BinarySearchTree {
   }
 
   /**
-   * 寻找最大key的节点
-   * 二叉查找树的特点: 最大节点没有右孩子
+   * 寻找最大key的结点
+   * 二叉查找树的特点: 最大结点没有右孩子
    * 
    * @returns Node
    * @memberof BinarySearchTree
@@ -133,8 +133,8 @@ class BinarySearchTree {
   }
 
   /**
-   * 寻找给定节点的中序后继
-   * 1. 如果右子树非空，则后继为右子树的最小节点
+   * 寻找给定结点的中序后继
+   * 1. 如果右子树非空，则后继为右子树的最小结点
    * 2. 如果右子树为空，为了找到其后继，从结点 x 开始向上查找，直到遇到一个祖先结点 y，它的左儿子也是结点 x 的祖先，则结点 y 就是结点 x 的后继
    * 
    * @param {Node} node 
@@ -153,7 +153,7 @@ class BinarySearchTree {
     return parent;
   }
   /**
-   * 删除节点
+   * 删除结点
    * 1. 若被删除结点 z 是叶子结点，则直接删除，不会破坏二叉查找树的性质；
    * 2. 若结点 z 只有左子树或只有右子树，则让 z 的子树成为 z 父结点的子树，替代 z 的位置；
    * 3. 若结点 z 既有左子树，又有右子树，则用 z 的后继（Successor）代替 z，然后从二叉查找树中删除这个后继，这样就转换成了第一或第二种情况。
@@ -163,7 +163,7 @@ class BinarySearchTree {
   removeNode(node) {
     const remove = (node) => {
       if (!node.left && !node.right) {
-        // node为叶子节点
+        // node为叶子结点
         if (node.parent) {
           if (node.parent.left === node) {
             node.parent.left = null;
@@ -191,9 +191,9 @@ class BinarySearchTree {
         }
       } else {
         // 左右都有
-        // 找到后继节点
+        // 找到后继结点，其实因为有右子树也就是右子树中的最小结点
         let successorNode = this.successor(node);
-        // 用后继节点的key替换
+        // 用后继结点的key替换
         node.key = successorNode.key;
         // 转换为1或者2的情况
         remove(successorNode);
@@ -286,10 +286,10 @@ tree.printTree();
 console.log('\n后序遍历');
 tree.printTree('post');
 
-console.log('\n最小的节点:', tree.min().key);
-console.log('\n最大的节点:', tree.max().key);
+console.log('\n最小的结点:', tree.min().key);
+console.log('\n最大的结点:', tree.max().key);
 
 let rnode = tree.searchNode(arr[10]);
-console.log('待删除节点: ', rnode.key);
+console.log('待删除结点: ', rnode.key);
 tree.removeNode(rnode);
 tree.printTree();
