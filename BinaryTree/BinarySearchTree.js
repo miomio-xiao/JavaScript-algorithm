@@ -1,12 +1,12 @@
 /**
  * 树结点
- * 
+ *
  * @class Node
  */
 class Node {
   /**
    * Node 构造器
-   * @param {any} key 
+   * @param {any} key
    * @memberof Node
    */
   constructor(key) {
@@ -19,11 +19,10 @@ class Node {
 
 /**
  * 二叉搜索树
- * 
+ *
  * @class BinarySearchTree
  */
 class BinarySearchTree {
-
   /**
    * BinarySearchTree 构造器
    * @memberof BinarySearchTree
@@ -34,8 +33,8 @@ class BinarySearchTree {
 
   /**
    * 插入一个树结点
-   * 
-   * @param {any} key 
+   *
+   * @param {any} key
    * @memberof BinarySearchTree
    */
   insertNode(key) {
@@ -68,17 +67,17 @@ class BinarySearchTree {
 
   /**
    * 从树中查找一个结点
-   * 
-   * @param {any} key 
+   *
+   * @param {any} key
    * @returns Node
    * @memberof BinarySearchTree
    */
   searchNode(key) {
     /**
      * 递归子树查找结点
-     * 
+     *
      * @param {Node} node 当前子树根结点
-     * @param {any} key 
+     * @param {any} key
      * @returns Node
      */
     function search(node, key) {
@@ -105,7 +104,7 @@ class BinarySearchTree {
   /**
    * 寻找最小key的结点
    * 二叉查找树的特点: 最小结点没有左孩子
-   * 
+   *
    * @returns Node
    * @memberof BinarySearchTree
    */
@@ -120,7 +119,7 @@ class BinarySearchTree {
   /**
    * 寻找最大key的结点
    * 二叉查找树的特点: 最大结点没有右孩子
-   * 
+   *
    * @returns Node
    * @memberof BinarySearchTree
    */
@@ -136,8 +135,8 @@ class BinarySearchTree {
    * 寻找给定结点的中序后继
    * 1. 如果右子树非空，则后继为右子树的最小结点
    * 2. 如果右子树为空，为了找到其后继，从结点 x 开始向上查找，直到遇到一个祖先结点 y，它的左儿子也是结点 x 的祖先，则结点 y 就是结点 x 的后继
-   * 
-   * @param {Node} node 
+   *
+   * @param {Node} node
    * @returns node
    * @memberof BinarySearchTree
    */
@@ -157,11 +156,11 @@ class BinarySearchTree {
    * 1. 若被删除结点 z 是叶子结点，则直接删除，不会破坏二叉查找树的性质；
    * 2. 若结点 z 只有左子树或只有右子树，则让 z 的子树成为 z 父结点的子树，替代 z 的位置；
    * 3. 若结点 z 既有左子树，又有右子树，则用 z 的后继（Successor）代替 z，然后从二叉查找树中删除这个后继，这样就转换成了第一或第二种情况。
-   * @param {Node} node 
+   * @param {Node} node
    * @memberof BinarySearchTree
    */
   removeNode(node) {
-    const remove = (node) => {
+    const remove = node => {
       if (!node.left && !node.right) {
         // node为叶子结点
         if (node.parent) {
@@ -177,7 +176,9 @@ class BinarySearchTree {
         // 右子树为空
         node.left.parent = node.parent;
         if (node.parent) {
-          node.parent.left === node ? node.parent.left = node.left : node.parent.right = node.left;
+          node.parent.left === node
+            ? (node.parent.left = node.left)
+            : (node.parent.right = node.left);
         } else {
           this.root = node.left;
         }
@@ -185,7 +186,9 @@ class BinarySearchTree {
         // 左子树为空
         node.right.parent = node.parent;
         if (node.parent) {
-          node.parent.left === node ? node.parent.right = node.right : node.parent, right = node.right;
+          node.parent.left === node
+            ? (node.parent.right = node.right)
+            : (node.parent.right = node.right);
         } else {
           this.root = node.right;
         }
@@ -198,21 +201,21 @@ class BinarySearchTree {
         // 转换为1或者2的情况
         remove(successorNode);
       }
-    }
+    };
     remove(node);
   }
 
   /**
    * 打印二叉树
-   * 
+   *
    * @param {String=} type 输出顺序 pre、in、post
    * @memberof BinarySearchTree
    */
   printTree(type = 'in') {
     /**
      * 前序遍历
-     * 
-     * @param {Node} node 
+     *
+     * @param {Node} node
      */
     function preOrder(node) {
       if (node) {
@@ -223,8 +226,8 @@ class BinarySearchTree {
     }
     /**
      * 中序遍历
-     * 
-     * @param {Node} node 
+     *
+     * @param {Node} node
      */
     function inOrder(node) {
       if (node) {
@@ -235,8 +238,8 @@ class BinarySearchTree {
     }
     /**
      * 后序遍历
-     * 
-     * @param {Node} node 
+     *
+     * @param {Node} node
      */
     function postOrder(node) {
       if (node) {
@@ -256,40 +259,5 @@ class BinarySearchTree {
   }
 }
 
-/**
- * 生成长度为n的随机不重复的数组
- * 
- * @param {Number} n 
- * @returns Array
- */
-function randomArr(n) {
-  let arr = [];
-  while (n) {
-    let num = ~~(Math.random() * 100);
-    if (arr.indexOf(num) < 0) {
-      arr.push(num);
-      n--;
-    }
-  }
-  return arr;
-}
-
-let arr = randomArr(20);
-console.log(arr);
-let tree = new BinarySearchTree();
-arr.forEach(num => tree.insertNode(num));
-
-console.log('\n前序遍历:');
-tree.printTree('pre');
-console.log('\n中序遍历:');
-tree.printTree();
-console.log('\n后序遍历');
-tree.printTree('post');
-
-console.log('\n最小的结点:', tree.min().key);
-console.log('\n最大的结点:', tree.max().key);
-
-let rnode = tree.searchNode(arr[10]);
-console.log('待删除结点: ', rnode.key);
-tree.removeNode(rnode);
-tree.printTree();
+// export default BinarySearchTree;
+module.exports = BinarySearchTree;
