@@ -4,24 +4,7 @@
 const BinarySearchTree = require('../BinaryTree/BinarySearchTree');
 const { seqSearch } = require('./SeqSearch');
 const { binarySearch, binarySearchRecursion } = require('./BinarySearch');
-
-/**
- * 生成长度为n的随机不重复的数组
- *
- * @param {Number} n
- * @returns Array
- */
-function randomArr(n) {
-  let arr = [];
-  while (n) {
-    let num = ~~(Math.random() * n * 10);
-    if (arr.indexOf(num) < 0) {
-      arr.push(num);
-      n--;
-    }
-  }
-  return arr;
-}
+const { randomArr } = require('../utils');
 
 function testBinarySearchTree(arr) {
   let tree = new BinarySearchTree();
