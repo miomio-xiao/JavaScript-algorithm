@@ -8,15 +8,12 @@
 function makeChange(coinArr, money) {
   // 降序排序
   coinArr.sort((a, b) => b - a);
-  let result = [];
-  // let result = new Map();
+  let result = new Map();
   for (let i = 0; i < coinArr.length; i++) {
     let curCoin = coinArr[i];
     while (money >= curCoin && money > 0) {
-      result.push(curCoin);
-      money -= curCoin;
-      // result.set(curCoin, ~~(money / curCoin));
-      // money %= curCoin;
+      result.set(curCoin, ~~(money / curCoin));
+      money %= curCoin;
     }
   }
   return result;
