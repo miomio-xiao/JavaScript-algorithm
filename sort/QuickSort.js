@@ -1,10 +1,10 @@
 /**
  * 快排(两路) 时间复杂度O(nlogn)
- * 
- * @param {Array} arr 
- * @param {number} [l=0] 
- * @param {number} [r=arr.length - 1] 
- * @returns 
+ *
+ * @param {Array} arr
+ * @param {number} [l=0]
+ * @param {number} [r=arr.length - 1]
+ * @returns
  */
 function QuickSort(arr, l = 0, r = arr.length - 1) {
   if (l > r) return;
@@ -29,25 +29,29 @@ function QuickSort(arr, l = 0, r = arr.length - 1) {
 
 /**
  * 快排(三路)
- * 
- * @param {Array} arr 
- * @param {number} [l=0] 
- * @param {number} [r=arr.length - 1] 
- * @returns 
+ *
+ * @param {Array} arr
+ * @param {number} [l=0]
+ * @param {number} [r=arr.length - 1]
+ * @returns
  */
 function Quick3Sort(arr, l = 0, r = arr.length - 1) {
   if (l > r) return;
   let i = l;
   let m = l + 1;
   let j = r;
+  // 基准值取第一个arr[l]
   let p = arr[l];
   while (m <= j) {
     let flag = arr[m] - p;
     if (flag < 0) {
+      // 交换arr[i]跟arr[m], i++ m++
       [arr[i++], arr[m++]] = [arr[m], arr[i]];
     } else if (flag > 0) {
+      // 交换arr[j]跟arr[m], j--
       [arr[j--], arr[m]] = [arr[m], arr[j]];
     } else {
+      // 相等的时候 m++
       m++;
     }
   }

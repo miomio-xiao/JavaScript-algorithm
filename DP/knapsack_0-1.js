@@ -63,7 +63,7 @@ console.log(maxValues, selected);
 function knapsackSpace(weights, values, W) {
   const len = weights.length;
   let f = new Array(W + 1).fill(0);
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < len; i++) {
     for (let j = W; j >= weights[i]; j--) {
       f[j] = Math.max(f[j], f[j - weights[i]] + values[i]);
     }
